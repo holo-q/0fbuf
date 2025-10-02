@@ -1,0 +1,23 @@
+{
+  "pools": {
+    "shell": {
+      "name": "shell",
+      "class": "0fbuf",
+      "min": 5,
+      "spawn_cmd": "kitty --class {class} --title {class} tmux new -A -s {session}",
+      "pool_desktop": null,
+      "reset_via_tmux": true,
+      "reset_keys": "C-c reset Enter"
+    },
+    "nvim": {
+      "name": "nvim",
+      "class": "0fbuf-nvim",
+      "min": 3,
+      "spawn_cmd": "kitty --class {class} --title {class} nvim",
+      "pool_desktop": null,
+      "reset_via_tmux": false,
+      "reset_keys": null
+    }
+  }
+}
+

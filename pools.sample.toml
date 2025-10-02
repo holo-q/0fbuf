@@ -1,0 +1,85 @@
+# 0fbuf configuration - TOML format (much nicer than JSON!)
+
+[input]
+mouse_recent_ms = 500      # Mouse considered "recent" if moved within this ms
+key_suppress_ms = 400      # Keyboard suppresses mouse mode for this many ms
+input_poll_ms = 50         # Input sampling interval
+ensure_interval_ms = 800   # Pool ensure check interval
+motion_eps = 1             # Motion epsilon in pixels
+
+# Shell pool - auto-detected terminal with tmux
+[pools.shell]
+name = "shell"
+class = "0fbuf-shell"
+min = 3
+spawn_cmd = "kitty --class {class} --title {class} tmux new -A -s {session}"
+reset_via_tmux = true
+reset_keys = "C-c reset Enter"
+on_spawn = []
+# Anti-flicker strategies (experiment to find best for your WM):
+#   "none"      - No anti-flicker (let it flash)
+#   "all"       - Try everything (default, most aggressive)
+#   "unmap"     - Immediately unmap window
+#   "offscreen" - Move window off-screen
+#   "utility"   - Set window type to utility
+#   "iconic"    - Start in minimized state
+#   "lower"     - Lower to bottom of window stack
+#   "combo1"    - unmap + offscreen
+#   "combo2"    - utility + lower + skip_taskbar
+#   "combo3"    - iconic + offscreen
+antiflicker_strategy = "all"
+
+# Scratch terminal - quick one-off commands
+[pools.scratch]
+name = "scratch"
+class = "0fbuf-scratch"
+min = 1
+spawn_cmd = "kitty --class {class} --title {class} tmux new -A -s {session}"
+reset_via_tmux = true
+reset_keys = "C-c reset Enter"
+on_spawn = []
+antiflicker_strategy = "all"
+
+# Example: Dev environment with pre-configured directory
+# [pools.dev]
+# name = "dev"
+# class = "0fbuf-dev"
+# min = 2
+# spawn_cmd = "kitty --class {class} --title {class} tmux new -A -s {session}"
+# on_spawn = [
+#     "sleep 0.2 && xdotool type --window {xid} 'cd ~/projects && clear' && xdotool key --window {xid} Return"
+# ]
+
+# Example: Browser pool
+# [pools.browser]
+# name = "browser"
+# class = "0fbuf-browser"
+# min = 1
+# spawn_cmd = "firefox --class {class} --new-instance"
+# reset_via_tmux = false
+# on_spawn = []
+
+# Example: Calculator scratchpad
+# [pools.calc]
+# name = "calc"
+# class = "0fbuf-calc"
+# min = 1
+# spawn_cmd = "gnome-calculator"
+# reset_via_tmux = false
+# on_spawn = []
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Terminal spawn command examples:
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#
+# kitty:         "kitty --class {class} --title {class} tmux new -A -s {session}"
+# alacritty:     "alacritty --class {class} -t {class} -e tmux new -A -s {session}"
+# wezterm:       "wezterm start --class {class} -- tmux new -A -s {session}"
+# foot:          "foot --app-id={class} --title={class} tmux new -A -s {session}"
+# st:            "st -c {class} -t {class} -e tmux new -A -s {session}"
+# urxvt:         "urxvt -name {class} -title {class} -e tmux new -A -s {session}"
+# gnome-term:    "gnome-terminal --class={class} --title={class} -- tmux new -A -s {session}"
+# konsole:       "konsole --new-tab -p tabtitle={class} -e tmux new -A -s {session}"
+# xfce4-term:    "xfce4-terminal --class {class} --title {class} --disable-server -e 'tmux new -A -s {session}'"
+# tilix:         "tilix --class={class} --title={class} -e 'tmux new -A -s {session}'"
+# xterm:         "xterm -class {class} -T {class} -e tmux new -A -s {session}"

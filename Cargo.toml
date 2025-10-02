@@ -1,0 +1,30 @@
+[package]
+name = "zerofbuf"
+version = "0.1.0"
+edition = "2021"
+description = "Zero-frame application buffer - instant GUI application windows with pre-warmed pools"
+license = "MIT"
+repository = "https://github.com/holo-q/0fbuf"
+readme = "README.md"
+keywords = ["x11", "scratchpad", "terminal", "launcher", "window-manager"]
+categories = ["command-line-utilities", "gui"]
+authors = ["Your Name <your.email@example.com>"]
+
+[dependencies]
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+shell-words = "1.1"
+x11rb = { version = "0.13", features = ["xinput", "xkb"] }
+thiserror = "1"
+time = { version = "0.3", features = ["formatting"] }
+rand = "0.8"
+dirs = "5"
+clap = { version = "4.5", features = ["derive"] }
+signal-hook = "0.3"
+notify = "6"
+
+[[bin]]
+name = "0fbuf"
+path = "src/main.rs"

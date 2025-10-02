@@ -1,0 +1,58 @@
+{
+  "input": {
+    "mouse_recent_ms": 500,
+    "key_suppress_ms": 400,
+    "input_poll_ms": 50,
+    "ensure_interval_ms": 800,
+    "motion_eps": 1
+  },
+  "pools": {
+    "shell": {
+      "name": "shell",
+      "class": "0fbuf-shell",
+      "min": 3,
+      "spawn_cmd": "AUTO_DETECTED",
+      "pool_desktop": null,
+      "reset_via_tmux": true,
+      "reset_keys": "C-c reset Enter",
+      "on_spawn": []
+    },
+    "scratch": {
+      "name": "scratch",
+      "class": "0fbuf-scratch",
+      "min": 1,
+      "spawn_cmd": "AUTO_DETECTED",
+      "pool_desktop": null,
+      "reset_via_tmux": true,
+      "reset_keys": "C-c reset Enter",
+      "on_spawn": []
+    },
+    "_examples": {
+      "name": "_examples",
+      "class": "EXAMPLE_ONLY",
+      "min": 0,
+      "spawn_cmd": "CHOOSE ONE BELOW",
+      "pool_desktop": null,
+      "reset_via_tmux": false,
+      "reset_keys": null,
+      "on_spawn": [],
+      "_comment": "Terminal examples (pick your installed terminal):",
+      "_kitty": "kitty --class {class} --title {class} tmux new -A -s {session}",
+      "_alacritty": "alacritty --class {class} -t {class} -e tmux new -A -s {session}",
+      "_wezterm": "wezterm start --class {class} -- tmux new -A -s {session}",
+      "_foot": "foot --app-id={class} --title={class} tmux new -A -s {session}",
+      "_st": "st -c {class} -t {class} -e tmux new -A -s {session}",
+      "_urxvt": "urxvt -name {class} -title {class} -e tmux new -A -s {session}",
+      "_gnome-terminal": "gnome-terminal --class={class} --title={class} -- tmux new -A -s {session}",
+      "_konsole": "konsole --new-tab -p tabtitle={class} -e tmux new -A -s {session}",
+      "_xfce4-terminal": "xfce4-terminal --class {class} --title {class} --disable-server --hide-menubar -e 'tmux new -A -s {session}'",
+      "_tilix": "tilix --class={class} --title={class} -e 'tmux new -A -s {session}'",
+      "_xterm": "xterm -class {class} -T {class} -e tmux new -A -s {session}",
+      "_other_app_examples": "See below for non-terminal applications:",
+      "_browser": "firefox --class {class} --new-instance",
+      "_calc": "gnome-calculator",
+      "_filemanager": "thunar"
+    }
+  }
+}
+
